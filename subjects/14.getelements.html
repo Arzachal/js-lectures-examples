@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Get HTML Elements</title>
+</head>
+<body>
+    <div></div>
+    <div>
+        <ul>
+            <li>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <section id="my-section"></section>
+
+    <input id="my-input" class="my-class">
+    <span class="my-class"></span>
+    <button class="my-class"></button>
+    <a class="my-class my-other-class"></a>
+
+    <input type="text" style="background:red;" >
+    <script>
+        // Getting Elements
+        document.getElementsByTagName("div") 
+        // returns array of div elements inside HTML DOM
+        document.getElementsByTagName("textarea") 
+        // returns array of textarea elements inside HTML DOM. Since there is none returns empty array
+        document.getElementById("my-section") 
+        // returns element with its id is my-section inside HTML DOM
+        document.getElementById("not-my-section") 
+        // returns element with its id is my-sections inside HTML DOM. Since there is none returns null
+        document.getElementsByClassName("my-class") 
+        // returns array of element with my-class class name inside HTML DOM. 
+        document.getElementsByClassName("not-my-class") 
+        // returns array of element with not-my-class class name inside HTML DOM. Since there is none Since there is none returns empty array 
+
+
+        document.querySelector("div");
+        // returns css selector div. There are multiple elements that covers this selector. First one will be selected
+        document.querySelector("textarea");
+        // returns css selector textarea. Since there is none returns null
+        document.querySelector("input#my-input.my-class")
+        // returns input that has id of my-input and has class of my-class
+        document.querySelector("ul > li");
+        // returns first li element that is child of ul element
+        document.querySelector("ul li");
+        // returns first li element inside ul element
+        document.querySelectorAll("div");
+        // returns array of div elements inside HTML DOM
+        document.querySelectorAll("a.my-class.my-other-class");
+        // returns array of elements that have classes 'my-class' and 'my-other-class'
+        
+    </script>
+</body>
+</html>

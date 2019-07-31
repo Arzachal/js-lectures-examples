@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Events</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+        function randomNumberGenerator(min,max){
+            min = min == undefined ? 0 : min;
+            max = max == undefined ? 1000 : max;
+            return (Math.random() * (max-min) + min).toFixed(0);
+        }
+        function showRandomNumber(resultElId, min, max){
+            var el = document.getElementById(resultElId);
+            if(el == null){
+                console.warn("No element with the id: " + resultElId);
+                return;
+            }else {
+                el.innerText = randomNumberGenerator(min, max);
+            }
+        }
+        window.onload = function () {
+
+        }
+    </script>
+</head>
+<body>
+    <div class="container" style="margin-top: 40px;">
+        <div class="row">
+            <div class="col-3" style="border: solid 1px #eee; padding: 10px;">
+                <div style="height: 60px; font-size: 24px;">
+                    Random Number: <span id="random-number-result"></span>
+                </div>
+                <button id="my-button" style="width: 100%" class="btn btn-success" onclick="showRandomNumber('random-number-result', 0, 10)">GET RANDOM NUMBER</button>
+            </div>
+            <div class="col-3">
+
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</body>
+</html>

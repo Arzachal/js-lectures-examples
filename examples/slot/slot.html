@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slot Machine Prototype</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .slots {
+            padding-top: 100px;
+        }
+        .slot {
+            position: relative;
+            border: 1px solid #eee;
+            margin: 40px 0;
+            width: 160px;
+            height: 140px;
+            perspective: 800px;
+            overflow: hidden;
+        }
+        .results {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform: translateZ(72px) rotateY(-8deg) rotateX(90deg);
+            transform-style:  preserve-3d;
+            transition: transform 1s;
+        }
+        .result {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            background-color: rgb(218, 218, 218);
+            box-sizing: border-box;
+            border: 1px solid white;
+            left: 30px;
+            top: 40px;
+            line-height: 60px;
+            font-size: 40px;
+            text-align: center;
+        }
+        .result:nth-child(1) {transform: rotateX(0deg) translateZ(72px)}
+        .result:nth-child(2) {transform: rotateX(45deg) translateZ(72px)}
+        .result:nth-child(3) {transform: rotateX(90deg) translateZ(72px)}
+        .result:nth-child(4) {transform: rotateX(135deg) translateZ(72px)}
+        .result:nth-child(5) {transform: rotateX(180deg) translateZ(72px)}
+        .result:nth-child(6) {transform: rotateX(225deg) translateZ(72px)}
+        .result:nth-child(7) {transform: rotateX(270deg) translateZ(72px)}
+        .result:nth-child(8) {transform: rotateX(315deg) translateZ(72px)}
+    </style>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="slots">
+            <div class="slot" id="slot-left">
+                <div class="results">
+                    <div class="result">1</div>
+                    <div class="result">2</div>
+                    <div class="result">3</div>
+                    <div class="result">4</div>
+                    <div class="result">5</div>
+                    <div class="result">6</div>
+                    <div class="result">7</div>
+                    <div class="result">8</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
