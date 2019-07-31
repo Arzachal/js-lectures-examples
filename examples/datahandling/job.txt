@@ -1,0 +1,3 @@
+Randomuser API'sinden kulannıcı bilgilerini çekip siteden gösterme 
+
+https://randomuser.me/api/?results=12

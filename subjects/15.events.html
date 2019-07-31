@@ -22,8 +22,18 @@
                 el.innerText = randomNumberGenerator(min, max);
             }
         }
-        window.onload = function () {
+        
+        function lastKeyGetter(e) {
+            console.log(e);
+            var lastKeyEl = document.getElementById("last-key");
+            var lastKeyCodeEl = document.getElementById("last-key-code");
+            lastKeyEl.innerHTML = e.key !==" " ? e.key : "Spacebar";
+            lastKeyCodeEl.innerHTML = e.keyCode;
+        }
 
+        window.onload = function () {
+            var lastKeyEl = document.getElementById("my-textarea");
+            lastKeyEl.addEventListener("keypress", lastKeyGetter);
         }
     </script>
 </head>
@@ -36,8 +46,11 @@
                 </div>
                 <button id="my-button" style="width: 100%" class="btn btn-success" onclick="showRandomNumber('random-number-result', 0, 10)">GET RANDOM NUMBER</button>
             </div>
-            <div class="col-3">
-
+            <div class="col-3" style="border: solid 1px #eee; padding: 10px;">
+                <div>
+                    Last Pressed Key: <span id="last-key"></span> Code: <span id="last-key-code"></span>
+                </div>
+                <textarea id="my-textarea" cols="34" rows="3"></textarea>
             </div>
             <div class="col-3"></div>
             <div class="col-3"></div>
