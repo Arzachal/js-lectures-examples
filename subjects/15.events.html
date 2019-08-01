@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,35 +9,96 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script>
-        function randomNumberGenerator(min,max){
-            min = min == undefined ? 0 : min;
-            max = max == undefined ? 1000 : max;
-            return (Math.random() * (max-min) + min).toFixed(0);
+        function randomNumberGenerator(min, max) {
+            min = typeof (min) != "number" ? 0 : min;
+            max = typeof (min) != "number" ? 1000 : max;
+            return (Math.random() * (max - min) + min).toFixed(0);
         }
-        function showRandomNumber(resultElId, min, max){
+
+        function showRandomNumber(resultElId, min, max) {
             var el = document.getElementById(resultElId);
-            if(el == null){
+            if (el == null) {
                 console.warn("No element with the id: " + resultElId);
                 return;
-            }else {
+            } else {
                 el.innerText = randomNumberGenerator(min, max);
             }
         }
-        
+
         function lastKeyGetter(e) {
             console.log(e);
             var lastKeyEl = document.getElementById("last-key");
             var lastKeyCodeEl = document.getElementById("last-key-code");
-            lastKeyEl.innerHTML = e.key !==" " ? e.key : "Spacebar";
+            lastKeyEl.innerHTML = e.key !== " " ? e.key : "Spacebar";
             lastKeyCodeEl.innerHTML = e.keyCode;
+        }
+        // window.onload = function () {
+        //     var lastKeyEl = document.getElementById("my-textarea");
+        //     lastKeyEl.addEventListener("keypress", lastKeyGetter);
+        // }
+    </script>
+    <style>
+        .dragging {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.3)
+        }
+    </style>
+    <script>
+        //get coordinat listener
+        var dragStarted = false;
+
+
+        function getCoord(e) {
+            return {
+                x: e.clientX,
+                y: e.clientY
+            };
+        }
+
+        function showCoordValues(x, y) {
+            var xEl = document.getElementById("x-value");
+            var yEl = document.getElementById("y-value");
+            xEl.innerText = x;
+            yEl.innerText = y;
+        }
+
+        function coordShowHandler(e) {
+            showCoordValues(getCoord(e).x, getCoord(e).y);
         }
 
         window.onload = function () {
-            var lastKeyEl = document.getElementById("my-textarea");
-            lastKeyEl.addEventListener("keypress", lastKeyGetter);
+            var mousemoveEl = document.getElementById("mousemove-area");
+            mousemoveEl.addEventListener("mousemove", coordShowHandler);
+
+            var startX, startY;
+            function startDrag(e) {
+                startY = e.clientY;
+                startX = e.clientX;
+                dragStarted = true;
+                dragEl.classList.toggle("dragging");
+                document.addEventListener("mousemove", dragging);
+
+            }
+
+            function dragging(e) {
+                e.preventDefault();
+
+                var x = e.clientX;
+                var y = e.clientY;
+                dragEl.style.transform = "translate("+ (x - startX) + "px, "+ (y - startY) +"px)";
+            }
+
+            function endDrag(e) {
+                dragStarted = false;
+                document.removeEventListener("mousemove", dragging);
+            }
+            var dragEl = document.getElementById("draggable");
+            dragEl.addEventListener("mousedown", startDrag);
+            dragEl.addEventListener("mouseup", endDrag);
         }
     </script>
 </head>
+
 <body>
     <div class="container" style="margin-top: 40px;">
         <div class="row">
@@ -44,7 +106,8 @@
                 <div style="height: 60px; font-size: 24px;">
                     Random Number: <span id="random-number-result"></span>
                 </div>
-                <button id="my-button" style="width: 100%" class="btn btn-success" onclick="showRandomNumber('random-number-result', 0, 10)">GET RANDOM NUMBER</button>
+                <button id="my-button" style="width: 100%" class="btn btn-success"
+                    onclick="showRandomNumber('random-number-result', 0, 100)">GET RANDOM NUMBER</button>
             </div>
             <div class="col-3" style="border: solid 1px #eee; padding: 10px;">
                 <div>
@@ -52,9 +115,16 @@
                 </div>
                 <textarea id="my-textarea" cols="34" rows="3"></textarea>
             </div>
-            <div class="col-3"></div>
-            <div class="col-3"></div>
+            <div class="col-3">
+                <div id="mousemove-area" style="border: 1px solid #333; width: 200px; height: 200px"></div>
+                <span id="x-value"></span>
+                <span id="y-value"></span>
+            </div>
+            <div class="col-3">
+                <div id="draggable" style="border: 1px solid #333; width: 40px; height: 40px"></div>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
